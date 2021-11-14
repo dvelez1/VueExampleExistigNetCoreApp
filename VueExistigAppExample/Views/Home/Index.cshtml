@@ -1,0 +1,154 @@
+﻿ <!-- Required meta tags -->
+@*<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">*@
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center mb-2">
+    <h1 class="display-4">Example of VueJs with .NET Core</h1>
+</div>
+<div id="vueExampleApp">
+    <div class="card">
+
+        <div class="card-header">User Input Screen </div>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label">First name</label>
+                        <input type="text" v-model="user.firstName" class="form-control" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label">Last name</label>
+                        <input type="text" v-model="user.lastName" class="form-control" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label">Social Security</label>
+                        <input type="text" v-model="user.socialSecurity" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label">Date of Birth </label>
+                        <input type="text" v-model="user.dataOfBirth" class="form-control" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label">City</label>
+                        <input type="text" v-model="user.city" class="form-control" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label">Country</label>
+                        <input type="text" v-model="user.country" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <p v-cloak>{{user.firstName}}</p>
+        </div>
+
+        <div class="card-footer d-md-flex justify-content-md-end">
+            <button type="button" v-on:click="addUser()"  class="btn btn-dark">Add user</button>
+        </div>
+
+    </div>
+
+    <hr />
+
+    <div class="card">
+        <div class="card-header">List of Users</div>
+        <div class="card-body">
+
+            <div v-if="listOfUsers.length > 0">
+                <ul class="list-group list-group-flush" v-for="user in listOfUsers">
+                    <li class="list-group-item">
+                        First name: {{user.firstName}}, Last Name {{user.lastName}}, SS: {{user.socialSecurity}}
+                        <br />
+                        Date of Birth: {{user.dataOfBirth}}, City {{user.city}}, Country: {{user.country}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* VeuJs *@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+
+
+<script>
+
+    let vue = new Vue({
+        el: '#vueExampleApp',
+        data: {
+            user: {
+                firstName: "",
+                lastName: "",
+                socialSecurity: "",
+                dataOfBirth: "",
+                city: "",
+                country: "",
+            },
+            listOfUsers: [
+                {
+                    firstName: "Ramon",
+                    lastName: "Perez",
+                    socialSecurity: "111111111",
+                    dataOfBirth: "",
+                    city: "Caguas",
+                    country: "Puerto Rico"
+                },
+                {
+                    firstName: "Pedro",
+                    lastName: "Rivera",
+                    socialSecurity: "111111112",
+                    dataOfBirth: "",
+                    city: "San Juan",
+                    country: "Puerto Rico"
+                }
+            ]
+
+        },
+        created: function () {
+
+        },
+        mounted: function () {
+
+        },
+        watch: {
+
+        },
+        methods: {
+            addUser: function () {
+                this.listOfUsers.push(this.user);
+                console.log(this.listOfUsers);
+                this.clearUserInput();
+            },
+            clearUserInput() {
+                this.user = null;
+            }
+
+        }
+
+    });
+</script>
